@@ -55,12 +55,13 @@ for _, mob in ipairs(getMobs()) do
         local connection 
         connection = game:GetService("RunService").RenderStepped:Connect(function()
             if mob.Parent ~= nil and mob:FindFirstChildOfClass("Humanoid") and mob:FindFirstChild("HumanoidRootPart", true) then
+                print("xD")
                 local vector, onScren = workspace.CurrentCamera:WorldToViewportPoint(mob:FindFirstChild("HumanoidRootPart", true).Position)
 
                 local rootPart = mob:FindFirstChild("HumanoidRootPart", true)
                 local head = mob:FindFirstChild("Head", true)
                 local headPosition = workspace.CurrentCamera:WorldToViewportPoint(head.Position + Vector3.new(0, 0.5, 0))
-                local LegPosition = workspace.CurrentCamera:WorldToViewportPoint(rootPart - Vector3.new(0,3,0))
+                local LegPosition = workspace.CurrentCamera:WorldToViewportPoint(vector - Vector3.new(0,3,0))
 
                 BoxOutline.Size = Vector2.new(1000/ vector.Z, headPosition.Y - LegPosition.Y)
                 BoxOutline.Position = Vector2.new(vector.X - BoxOutline.Size.X / 2, vector.Y - BoxOutline.Size.Y / 2)
@@ -76,8 +77,9 @@ for _, mob in ipairs(getMobs()) do
 
                 HealthBar.Size = Vector2.new(2, (headPosition.Y - LegPosition.Y) / (mob:FindFirstChildOfClass("Humanoid").MaxHealth / math.clamp(mob:FindFirstChildOfClass("Humanoid").Health, 0, mob:FindFirstChildOfClass("Humanoid").MaxHealth)))
                 HealthBar.Position = Vector2.new(Box.Position.X - 6, Box.Position.Y + (1 / HealthBar.Size.Y))
-                HealthBar.Color = Color3.fromHSV(tick() % 5 / 5, 1, 1)
+                HealthBar.Color = Color3.fromRGB(255 - 255 / (mob:FindFirstChildOfClass("Humanoid").MaxHealth / mob:FindFirstChildOfClass("Humanoid").Health), 255 / (mob:FindFirstChildOfClass("Humanoid").MaxHealth / mob:FindFirstChildOfClass("Humanoid").Health), 0)
             else
+                print("xnx")
                 HealthBar.Visible = false 
                 Box.Visible = false 
                 HealthBarOutline.Visible = false 
