@@ -1,6 +1,7 @@
 local players = game:GetService("Players")
 local client = players.LocalPlayer
 local character = client or client.CharacterAdded:Wait()
+local live = workspace:WaitForChild("Live")
 
 local function checkMob(model)
     if (model:FindFirstChildOfClass("Humanoid")) then
@@ -11,7 +12,6 @@ local function checkMob(model)
 end
 
 local function getMobs()
-    local live = workspace:WaitForChild("Live")
     local mobs = {}
 
     for _, mob in ipairs(live:GetChildren()) do
@@ -23,5 +23,3 @@ local function getMobs()
     return mobs 
 end
 
-
-print(unpack(getMobs()))
