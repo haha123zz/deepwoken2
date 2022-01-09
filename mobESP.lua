@@ -54,11 +54,11 @@ for _, mob in ipairs(getMobs()) do
     local function boxesp()
         local connection 
         connection = game:GetService("RunService").RenderStepped:Connect(function()
-            if mob.Parent ~= nil and mob:FindFirstChildOfClass("Humanoid") and mob:FindFirstDescendant("HumanoidRootPart") then
-                local vector, onScren = workspace.CurrentCamera:WorldToViewportPoint(mob:FindFirstDescendant("HumanoidRootPart").Position)
+            if mob.Parent ~= nil and mob:FindFirstChildOfClass("Humanoid") and mob:FindFirstChild("HumanoidRootPart", true) then
+                local vector, onScren = workspace.CurrentCamera:WorldToViewportPoint(mob:FindFirstChild("HumanoidRootPart", true).Position)
 
-                local rootPart = mob:FindFirstDescendant("HumanoidRootPart")
-                local head = mob:FindFirstDescendant("Head")
+                local rootPart = mob:FindFirstChild("HumanoidRootPart", true)
+                local head = mob:FindFirstChild("Head", true)
                 local headPosition = workspace.CurrentCamera:WorldToViewportPoint(head.Position + Vector3.new(0, 0.5, 0))
                 local LegPosition = workspace.CurrentCamera:WorldToViewportPoint(rootPart - Vector3.new(0,3,0))
 
